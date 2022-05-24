@@ -26,13 +26,15 @@ function App() {
     setloading(true)
      axios.get(`https://api.unsplash.com/search/photos?query=${search}&client_id=${process.env.REACT_APP_KEY}`)
     .then(function(res){
+
       setimages(res?.data?.results?.map((val,index)=>{
         var url=val?.urls?.regular
         var likes= val?.likes
-        var download=val?.links?.download
+        var download=val?.urls?.regular
+        var user_links=val?.user?.links?.html
         var first=val?.user?.first_name
         var last=  val?.user?.last_name
-       return({url,likes,download,Name:(first+" "+last)})
+       return({url,likes,download,Name:(first+" "+last),user_links})
       }))
     })
 
